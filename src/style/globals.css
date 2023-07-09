@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.section-space-x {
+  @apply mx-auto max-w-[1300px] px-5;
+}
+
+.navbar-fixed {
+  @apply bg-white text-black;
+}
+
+input {
+  @apply focus:outline-none;
+}
+
+select {
+  @apply border bg-transparent px-3 py-2;
+}
+
+:is(.order-summary-table) :is(th, td) {
+  @apply py-1;
+}
+
+.order-summary-table tr th {
+  @apply text-left font-normal;
+}
+
+.order-summary-table tr td {
+  @apply text-right;
+}
+
+.form-auth-register input {
+  @apply border-2 px-3 py-2;
+}
