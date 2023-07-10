@@ -3,7 +3,7 @@
 import { publicRequest, userRequest } from "@/axios/requestMethods";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewItemCart, addProduct, getAllCartItem } from "@/redux/cartSlice";
+import { addNewItemCart, addProduct, getAllCartItem } from "@/redux/actions/cartSlice";
 import Swal from "sweetalert2";
 import { useSession } from "next-auth/react";
 
