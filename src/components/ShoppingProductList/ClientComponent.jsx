@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import { useState, useEffect } from "react";
-import Product from "@/components/Product";
+import Product from "@/components/ShoppingProductList/Product";
 
 const ORIGIN_URL = process.env.NEXT_PUBLIC_ORIGIN_URL;
 

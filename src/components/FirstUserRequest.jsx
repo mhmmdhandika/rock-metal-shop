@@ -2,7 +2,7 @@
 
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getAllCartItem } from "@/redux/cartSlice";
+import { getAllCartItem } from "@/redux/actions/cartSlice";
 import { useSession } from "next-auth/react";
 
 export default function FirstUserRequest({ children }) {

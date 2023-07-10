@@ -1,4 +1,4 @@
-import Product from "@/components/Product";
+import Product from "@/components/ShoppingProductList/Product";
 import axios from "axios";
 
 const ORIGIN_URL = process.env.NEXT_PUBLIC_ORIGIN_URL

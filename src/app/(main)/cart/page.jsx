@@ -6,7 +6,7 @@ import Link from "next/link";
 import { loadStripe } from "@stripe/stripe-js";
 import { useRouter } from 'next/navigation';
 import { BiTrash as TrashIcon } from 'react-icons/bi'
-import { deleteItemCart, updateQuantityItemCart } from "@/redux/cartSlice";
+import { deleteItemCart, updateQuantityItemCart } from "@/redux/actions/cartSlice";
 import { useSession } from "next-auth/react";
 import Swal from "sweetalert2";
 
