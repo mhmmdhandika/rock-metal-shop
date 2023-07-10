@@ -4,7 +4,8 @@ import {
   AiOutlineSearch as SearchIcon,
   AiOutlineShoppingCart as CartIcon,
 } from "react-icons/ai";
-import {GrLinkPrevious as LinkPreviousIcon} from 'react-icons/gr'
+import { GrLinkPrevious as LinkPreviousIcon } from 'react-icons/gr'
+import { AiOutlineHeart as HeartIcon } from 'react-icons/ai'
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useSelector } from "react-redux";
@@ -79,17 +80,27 @@ function Navbar() {
         {/* Toggle Bar */}
         <div className="flex flex-grow-0 items-center justify-end gap-5">
           {session && (
-            <Link href="/cart" className="relative">
-              <CartIcon
-                size={25}
-                color={
-                  isNavbarTransparent ? "white" : "black"
-                }
-              />
-              <span className="absolute -right-3 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-blue-800 text-white">
-                {cart.totalQuantity}
-              </span>
-            </Link>
+            <>
+              <Link href="/cart" className="relative">
+                <CartIcon
+                  size={25}
+                  color={
+                    isNavbarTransparent ? "white" : "black"
+                  }
+                />
+                <span className="absolute -right-3 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-blue-800 text-white">
+                  {cart.totalQuantity}
+                </span>
+              </Link>
+              <Link href="/wishlists">
+                <HeartIcon 
+                  size={25}
+                  color={
+                    isNavbarTransparent ? "white" : "black"
+                  }
+                />
+              </Link>
+            </>
           )}
           <button
             className={`focus:outline-none ${

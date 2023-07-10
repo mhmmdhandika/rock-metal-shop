@@ -12,7 +12,7 @@ function Product({ item }) {
           <h1 className="mb-2 text-center text-lg font-semibold text-white">
             {item.title}
           </h1>
-          <ActionButtons />
+          <ActionButtons itemId={item.id} />
         </div>
       </div>
     </div>
