@@ -1,31 +1,21 @@
-"use client";
-
-import { userRequest } from "@/axios/requestMethods";
-import { useSession } from "next-auth/react";
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { AiFillHeart as FillHeartIcon } from "react-icons/ai";
-import { AiOutlineShoppingCart as CartIcon } from "react-icons/ai";
-import { BsTrash3 as TrashIcon } from "react-icons/bs"
 import ActionButtons from "@/components/ShoppingProductList/ActionButtons";
 
+const { NEXT_PUBLIC_ORIGIN_URL } = process.env
 
-export default function WishlistsPage() {
-  const { data: session } = useSession();
-  const [products, setProducts] = useState([]);
+async function getWishlistItems(token) {
+  const response = await fetch(`${NEXT_PUBLIC_ORIGIN_URL}/api/wishlist`, {
+    method: "GET",
+    headers: {
+      token: `Bearer ${token}`,
+    },
+  });
+  const result = await response.json()
+  console.log(result)
+  return result
+}
 
-  useEffect(() => {
-    if (session) {
-      const fetchWislistProducts = async () => {
-        const response = await userRequest(session?.user.accessToken).get(
-          "/api/wishlist"
-        );
-        setProducts(response.data.products);
-      };
-      fetchWislistProducts();
-      console.log(products);
-    }
-  }, [session]);
+export default async function WishlistsPage({ params: { token } }) {
+  const userWishlist = await getWishlistItems(token)
 
   return (
     <div>
@@ -33,8 +23,8 @@ export default function WishlistsPage() {
         {/* card products container */}
         <div className="mx-auto grid max-w-[25rem] items-center gap-2 md:mx-0 md:max-w-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {/* card product */}
-          {products.length > 1 ? (
-            products.map((item, index) => (
+          {userWishlist.products.length > 1 ? (
+            userWishlist.products.map((item, index) => (
               <div
                 key={index}
                 className="group relative flex flex-col justify-center overflow-hidden bg-slate-100"
