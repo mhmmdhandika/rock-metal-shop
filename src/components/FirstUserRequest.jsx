@@ -21,7 +21,7 @@ export default function FirstUserRequest({ children }) {
     fetchCartItems();
 
     // fetch cart items every 10 seconds
-    const intervalId = setInterval(fetchCartItems, 30 * 1000)
+    const intervalId = setInterval(fetchCartItems, 60 * 1000)
 
     // clean up the interval on component unmount
     return () => clearInterval(intervalId)
