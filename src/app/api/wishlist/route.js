@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import Product from '@/models/Product'
 import Wishlist from '@/models/Wishlist';
 import connectToMongoDB from '@/lib/mongodb';
 import { verifyToken } from '@/helpers/verifyToken';
@@ -53,9 +54,7 @@ export async function POST(request) {
     }
 
     // check if the product is already exist in the user's wishlist
-    const existingProduct = userWishlist.products.find((item) => 
-      item.product.equals(productId)
-    )
+    const existingProduct = userWishlist.products.find((item) => item.product.equals(productId))
 
     if (existingProduct) {
       throw new Error('The product is already on your wishlist')

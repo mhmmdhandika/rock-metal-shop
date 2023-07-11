@@ -92,7 +92,7 @@ function Navbar() {
                   {cart.totalQuantity}
                 </span>
               </Link>
-              <Link href={`/wishlists/${session.user.accessToken}`}>
+              <Link href="/wishlists">
                 <HeartIcon 
                   size={25}
                   color={

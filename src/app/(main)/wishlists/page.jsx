@@ -1,4 +1,6 @@
 import ActionButtons from "@/components/ShoppingProductList/ActionButtons";
+import { getServerSession } from "next-auth/next";
+import nextAuthOptions from '@/options/next-auth';
 
 const { NEXT_PUBLIC_ORIGIN_URL } = process.env
 
@@ -10,12 +12,12 @@ async function getWishlistItems(token) {
     },
   });
   const result = await response.json()
-  console.log(result)
   return result
 }
 
-export default async function WishlistsPage({ params: { token } }) {
-  const userWishlist = await getWishlistItems(token)
+export default async function WishlistsPage() { 
+  const session = await getServerSession(nextAuthOptions)
+  const userWishlist = await getWishlistItems(session.user.accessToken)
 
   return (
     <div>
