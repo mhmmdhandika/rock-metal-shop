@@ -63,7 +63,7 @@ function Product({ params }) {
 
   return (
     <div className="section-space-x grid gap-10 px-5 mb-10 md:grid-cols-2">
-      <div className="sticky top-20 relative aspect-square overflow-hidden">
+      <div className="relative aspect-square overflow-hidden md:sticky md:top-20">
         <img
           src={product.img} 
           alt={product.title}
