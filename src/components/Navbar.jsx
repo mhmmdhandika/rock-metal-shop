@@ -56,9 +56,9 @@ function Navbar() {
 
   return (
     <nav
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ease-in-out ${
+      className={`z-50 w-full transition-all duration-300 ease-in-out ${
         isNavbarTransparent ? "bg-transparent" : "bg-white"
-      }`}
+      } ${pathname === '/' ? "fixed top-0" : "sticky top-0"}`}
       ref={navbar}
     >
       <div className="section-space-x grid grid-cols-2 w-full md:grid-cols-[1fr_2fr_1fr] items-center justify-between py-3">

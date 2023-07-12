@@ -10,7 +10,7 @@ import "swiper/css/autoplay";
 
 function Header() {
   return (
-    <header className="overflow-hidden relative -top-[66px]">
+    <header className="overflow-hidden">
       <Swiper
         spaceBetween={0}
         slidesPerView={1}
