@@ -23,7 +23,7 @@ export default async function ShoppingProductList(props) {
   const products = await getProducts(props.limit);
 
   return (
-    <div className="section-space-x">
+    <div className="section-space-x my-5">
       <div className="grid justify-between gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {products?.map((item, index) => (
           <Product item={item} key={index} />

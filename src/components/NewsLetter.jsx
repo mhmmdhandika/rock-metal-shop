@@ -2,7 +2,7 @@ import { IoSend as SendIcon } from "react-icons/io5";
 
 function NewsLetter() {
   return (
-    <div className="my-5 bg-[#FCF5F5]">
+    <div className="mb-5 bg-[#FCF5F5]">
       <div className="section-space-x flex flex-col items-center justify-center gap-3 py-12">
         <h1 className="text-4xl font-bold">NewsLetter</h1>
         <p>Get timely updates from your favorite products</p>
