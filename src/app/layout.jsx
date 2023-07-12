@@ -7,6 +7,7 @@ import FirstUserRequest from "@/components/FirstUserRequest"
 const lato = Lato({
   subsets: ["latin"],
   weight: ["300", "400", "700"],
+  fallback: ['system-ui', 'arial']
 });
 
 export const metadata = {
