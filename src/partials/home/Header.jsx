@@ -32,7 +32,7 @@ function Header() {
                 backgroundBlendMode: "multiply",
               }}
             >
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-white flex flex-col justify-center items-center gap-2">
+              <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-2 text-center text-white">
                 <h1 className="text-5xl font-bold">{item.title}</h1>
                 <p>{item.desc}</p>
                 <a
