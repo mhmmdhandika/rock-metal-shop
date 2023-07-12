@@ -75,7 +75,7 @@ function Product({ params }) {
           {product.title}
         </h1>
         <h2 className="my-3 text-7xl font-extralight">${product.price}</h2>
-        <p>{product.desc}</p>
+        <div dangerouslySetInnerHTML={{ __html: product.desc }} className="my-3 product-desc" />
         <form>
           <div className="flex items-center gap-14">
             {/* color option */}

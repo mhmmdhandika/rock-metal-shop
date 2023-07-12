@@ -33,3 +33,7 @@ select {
 .form-auth-register input {
   @apply border-2 px-3 py-2;
 }
+
+.product-desc p br {
+  @apply my-3 block;
+}
