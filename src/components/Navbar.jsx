@@ -26,7 +26,11 @@ function Navbar() {
 
   // set transparent background only in home page
   useEffect(() => {
-    if (pathname === "/") setIsNavbarTransparent(true);
+    if (pathname === "/") {
+      setIsNavbarTransparent(true);
+    } else {
+      setIsNavbarTransparent(false);
+    }
   }, [pathname]);
 
   useEffect(() => {
