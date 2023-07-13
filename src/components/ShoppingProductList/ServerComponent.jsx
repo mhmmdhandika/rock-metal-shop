@@ -1,7 +1,5 @@
 import Product from "@/components/ShoppingProductList/Product";
 import axios from "axios";
-// import { getServerSession } from "next-auth/next"
-// import nextAuthOptions from '@/options/next-auth' 
 
 const ORIGIN_URL = process.env.NEXT_PUBLIC_ORIGIN_URL;
 

@@ -21,7 +21,9 @@ export async function GET(request) {
 
     const userWishlist = await Wishlist.findOne({ userId: userTokenData.id }).populate('products.product').exec();
 
-    return NextResponse.json(userWishlist)
+    return NextResponse.json({
+      data: userWishlist
+    })
   } catch (error) {
     return NextResponse.json(
       { error: error.message },
@@ -74,7 +76,9 @@ export async function POST(request) {
       .populate('products.product')
       .exec();
 
-    return NextResponse.json(getUpdateWishlistPopulated)
+    return NextResponse.json({
+      data: getUpdateWishlistPopulated
+    })
   } catch (error) {
     return NextResponse.json(
       { error: error.message },

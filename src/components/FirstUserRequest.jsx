@@ -13,6 +13,7 @@ export default function FirstUserRequest({ children }) {
 
   // get cart items
   useEffect(() => {
+    console.log(session);
     if (status === "authenticated") {
       const fetchCartItems = () => {
         dispatch(getAllCartItem({ token: session?.user.accessToken }));
