@@ -8,17 +8,20 @@ import { GrLinkPrevious as LinkPreviousIcon } from 'react-icons/gr'
 import { AiOutlineHeart as HeartIcon } from 'react-icons/ai'
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { createSelector } from '@reduxjs/toolkit'
 import { useSelector } from "react-redux";
 import { useRef, useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
+
+const selectCart = (state) => state.cart;
 
 function Navbar() {
   const pathname = usePathname();
   const router = useRouter()
 
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
-  const { cart } = useSelector((state) => state)
+  const cart = useSelector(selectCart)
 
   const navbar = useRef(null);
   const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
@@ -83,7 +86,7 @@ function Navbar() {
         </div>
         {/* Toggle Bar */}
         <div className="flex flex-grow-0 items-center justify-end gap-5">
-          {session && (
+          {status === 'authenticated' && (
             <>
               <Link href="/cart" className="relative">
                 <CartIcon
@@ -155,7 +158,7 @@ function Navbar() {
             }`}
           >
             <div className="flex flex-col justify-center gap-5">
-              {session ? (
+              {status === 'authenticated' ? (
                 <>
                   <h2>Hi {session.user.firstName} 👋</h2>
                   <button
