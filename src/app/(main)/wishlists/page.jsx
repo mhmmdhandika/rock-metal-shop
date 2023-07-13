@@ -11,7 +11,7 @@ async function getWishlistItems(token) {
     },
   });
   const result = await response.json()
-  return result
+  return result.data
 }
 
 export default async function WishlistsPage() { 

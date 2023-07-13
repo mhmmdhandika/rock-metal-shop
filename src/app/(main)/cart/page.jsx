@@ -1,6 +1,7 @@
 "use client";
 
 import { publicRequest } from "@/axios/requestMethods";
+import { createSelector } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { loadStripe } from "@stripe/stripe-js";
@@ -14,11 +15,13 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
 
+const selectCart = createSelector((state) => state.cart)
+
 function Cart() {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const { cart } = useSelector((state) => state);
+  const cart = useSelector(selectCart);
   const { data: session } = useSession()
 
   const handleCheckout = async () => {

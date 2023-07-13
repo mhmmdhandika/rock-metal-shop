@@ -5,14 +5,17 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewItemCart, addProduct, getAllCartItem } from "@/redux/actions/cartSlice";
 import Swal from "sweetalert2";
+import { createSelector } from '@reduxjs/toolkit'
 import { useSession } from "next-auth/react";
+
+const selectCart = createSelector((state) => state.cart)
 
 function Product({ params }) {
  const { data: session } = useSession();
 
   const dispatch = useDispatch();
 
-  const { cart } = useSelector((state) => state);
+  const cart = useSelector(selectCart);
   const idProduct = params.id;
 
   const [product, setProduct] = useState({});
