@@ -1,27 +1,43 @@
 "use client";
 
 import { AiOutlineSearch as SearchIcon } from "react-icons/ai";
-import { MdOutlineFavoriteBorder as FavoriteIcon } from "react-icons/md";
+import {
+  AiFillHeart as FillHeartIcon,
+  AiOutlineHeart as OutlineHeartIcon
+} from "react-icons/ai";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addWishlistItem, deleteWishlistItem } from '@/redux/actions/wishlistSlice';
 
-export default function ActionButton({ userId, itemId }) {
+export default function ActionButton({ itemId, product }) {
+  const dispatch = useDispatch();
+
   const { data: session, status } = useSession();
+  const { wishlist } = useSelector((state) => state);
+
+  const [isWishlisted, setIsWishlisted] = useState(false);
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      wishlist.products.map((item) => {
+        if (item.product._id === itemId) {
+          setIsWishlisted(true)
+        }
+      });
+    }
+  }, [wishlist]);
 
   const handleWishlist = async (itemId) => {
     if (status === "authenticated") {
-      const response = await fetch("/api/wishlist", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          token: `Bearer ${session?.user.accessToken}`,
-        },
-        body: JSON.stringify({
-          productId: itemId,
-        }),
-      });
-      const result = await response.json();
+      if (isWishlisted) {
+        // delete item from wishlist
+        dispatch(deleteWishlistItem({ token: session.user.accessToken, productId: itemId }));
+      } else {
+        // add item to wishlist
+        dispatch(addWishlistItem({ token: session?.user.accessToken, productId: itemId, product }));
+      }
     } else {
       console.log("you are not authenticated");
     }
@@ -39,7 +55,7 @@ export default function ActionButton({ userId, itemId }) {
         className="ease rounded-full bg-white p-2 transition-all duration-300 hover:scale-125"
         onClick={() => handleWishlist(itemId)}
       >
-        <FavoriteIcon size={20} />
+        {isWishlisted ? <FillHeartIcon size={20} color="red"/> : <OutlineHeartIcon size={20}/>}
       </button>
     </div>
   );

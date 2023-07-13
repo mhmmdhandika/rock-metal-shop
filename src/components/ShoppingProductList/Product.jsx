@@ -1,10 +1,6 @@
 import Image from 'next/image'
 import ActionButtons from "./ActionButtons";
 
-const imageLoader = ({ src }) => {
-  return `https://i.ibb.co/b5PpGck/${src}`
-}
-
 function Product({ item }) {
   return (
     <div
@@ -23,7 +19,7 @@ function Product({ item }) {
           <h1 className="mb-2 text-center text-lg font-semibold text-white">
             {item.title}
           </h1>
-          <ActionButtons itemId={item._id} />
+          <ActionButtons product={item} itemId={item._id} />
         </div>
       </div>
     </div>

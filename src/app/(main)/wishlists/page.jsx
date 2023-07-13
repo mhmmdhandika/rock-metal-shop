@@ -1,4 +1,3 @@
-import ActionButtons from "@/components/ShoppingProductList/ActionButtons";
 import { getServerSession } from "next-auth/next";
 import nextAuthOptions from '@/options/next-auth';
 
@@ -41,7 +40,7 @@ export default async function WishlistsPage() {
                     <h1 className="mb-2 text-center text-lg font-semibold text-white">
                       {item.product.title}
                     </h1>
-                    <ActionButtons itemId={item.id} />
+                    {/* TODO: add action buttons */}
                   </div>
                 </div>
               </div>
