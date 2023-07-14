@@ -30,6 +30,8 @@ export default function ActionButton({ itemId, product }) {
 
   useEffect(() => {
     if (status === "authenticated") {
+      // reset the item wishlisted if not wishlisted anymore
+      setIsWishlisted(false);
       wishlist.products.map((item) => {
         if (item.product._id === itemId) {
           setIsWishlisted(true);

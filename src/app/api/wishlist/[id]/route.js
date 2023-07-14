@@ -25,6 +25,8 @@ export async function DELETE(request, context) {
       { $pull: { products: { product: productId } } },
       { new: true }
     )
+      .populate('products.product')
+      .exec();
 
     return NextResponse.json({
       data: userWishlist
