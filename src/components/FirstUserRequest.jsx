@@ -11,37 +11,37 @@ export default function FirstUserRequest({ children }) {
 
   const { data: session, status } = useSession();
 
-  // // get cart items
-  // useEffect(() => {
-  //   console.log(session);
-  //   if (status === "authenticated") {
-  //     const fetchCartItems = () => {
-  //       dispatch(getAllCartItem({ token: session?.user.accessToken }));
-  //     };
-  //     // fetch cart items immediately when the component mounts
-  //     fetchCartItems();
-  //
-  //     // fetch cart items every 60 seconds
-  //     const intervalId = setInterval(fetchCartItems, 60 * 1000);
-  //
-  //     // clean up the interval on component unmount
-  //     return () => clearInterval(intervalId);
-  //   }
-  // }, [status]);
-  //
-  // // get wishlist
-  // useEffect(() => {
-  //   if (status === "authenticated") {
-  //     const fetchWishlist = () => {
-  //       dispatch(getAllWishlist({ token: session?.user.accessToken }));
-  //     };
-  //     fetchWishlist();
-  //
-  //     const intervalId = setInterval(fetchWishlist, 60 * 1000);
-  //
-  //     return () => clearInterval(intervalId);
-  //   }
-  // }, [status]);
+  // get cart items
+  useEffect(() => {
+    console.log(session);
+    if (status === "authenticated") {
+      const fetchCartItems = () => {
+        dispatch(getAllCartItem({ token: session?.user.accessToken }));
+      };
+      // fetch cart items immediately when the component mounts
+      fetchCartItems();
+
+      // fetch cart items every 60 seconds
+      const intervalId = setInterval(fetchCartItems, 60 * 1000);
+
+      // clean up the interval on component unmount
+      return () => clearInterval(intervalId);
+    }
+  }, [status]);
+
+  // get wishlist
+  useEffect(() => {
+    if (status === "authenticated") {
+      const fetchWishlist = () => {
+        dispatch(getAllWishlist({ token: session?.user.accessToken }));
+      };
+      fetchWishlist();
+
+      const intervalId = setInterval(fetchWishlist, 60 * 1000);
+
+      return () => clearInterval(intervalId);
+    }
+  }, [status]);
 
   return children;
 }
