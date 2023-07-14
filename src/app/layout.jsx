@@ -2,17 +2,17 @@ import NextAuthProvider from "@/components/NextAuthProvider";
 import "@/style/globals.css";
 import { Lato } from "next/font/google";
 import ReduxClientProvider from "@/components/ReduxClientProvider";
-import FirstUserRequest from "@/components/FirstUserRequest"
+import FirstUserRequest from "@/components/FirstUserRequest";
 
 const lato = Lato({
   subsets: ["latin"],
   weight: ["300", "400", "700"],
-  fallback: ['system-ui', 'arial']
+  fallback: ["system-ui", "arial"],
 });
 
 export const metadata = {
-  title: "Shopskuy",
-  description: "Fill your wishlist with Shopskuy",
+  title: "Thunderstone Emporium ",
+  description: "Fill your wishlist with Thunderstone Emporium",
 };
 
 export default function RootLayout({ children }) {
@@ -21,9 +21,7 @@ export default function RootLayout({ children }) {
       <body className={lato.className} suppressHydrationWarning={true}>
         <NextAuthProvider>
           <ReduxClientProvider>
-            <FirstUserRequest>
-              {children}
-            </FirstUserRequest>
+            <FirstUserRequest>{children}</FirstUserRequest>
           </ReduxClientProvider>
         </NextAuthProvider>
       </body>
