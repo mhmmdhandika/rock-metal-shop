@@ -76,7 +76,7 @@ function Footer() {
     <footer>
       <div className="section-space-x grid items-center justify-center gap-10 px-5 py-5 md:grid-cols-3">
         <div className="flex flex-col justify-center gap-5 md:justify-start">
-          <h2 className="text-3xl font-semibold">Shopskuy.</h2>
+          <h2 className="text-3xl font-semibold">Thunderstone Emporium</h2>
           <p className="text-sm">
             Experience the perfect blend of nature's raw power and metal's
             relentless energy at our online Rock Shop Metal Store. Discover

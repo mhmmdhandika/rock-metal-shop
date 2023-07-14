@@ -81,7 +81,7 @@ function Navbar() {
               isNavbarTransparent ? "text-white" : "text-black"
             }`}
           >
-            Shopskuy!
+            Thunderstone Emporium
           </h1>
         </div>
         {/* Toggle Bar */}
