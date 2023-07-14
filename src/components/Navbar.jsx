@@ -5,7 +5,8 @@ import {
   AiOutlineShoppingCart as CartIcon,
 } from "react-icons/ai";
 import { GrLinkPrevious as LinkPreviousIcon } from 'react-icons/gr'
-import { AiOutlineHeart as HeartIcon } from 'react-icons/ai'
+import { AiOutlineHeart as HeartIcon, AiOutlineClose as CloseIcon } from 'react-icons/ai';
+import { IoExitOutline as ExitIcon } from 'react-icons/io5';
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { createSelector } from '@reduxjs/toolkit'
@@ -24,6 +25,8 @@ function Navbar() {
   const cart = useSelector(selectCart)
 
   const navbar = useRef(null);
+  const navbarAside = useRef(null);
+
   const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
   const [isNavbarTransparent, setIsNavbarTransparent] = useState(false);
 
@@ -53,8 +56,8 @@ function Navbar() {
     };
   }, [pathname]);
 
-  const toggleNavMenu = () => {
-    setIsNavMenuOpen(!isNavMenuOpen);
+  const handleSidebar = () => {
+    navbarAside.current.classList.toggle('navbar-aside')
   };
 
   return (
@@ -113,7 +116,7 @@ function Navbar() {
             className={`focus:outline-none ${
               isNavbarTransparent ? "text-white" : "text-black"
             }`}
-            onClick={toggleNavMenu}
+            onClick={handleSidebar}
           >
             <svg
               className="h-8 w-8"
@@ -145,62 +148,36 @@ function Navbar() {
           </button>
         </div>
       </div>
-      {/* Mobile Menu */}
-      {isNavMenuOpen && (
-        <div
-          className={`relative ${
-            isNavbarTransparent ? "bg-transparent" : "bg-white"
-          }`}
-        >
-          <div
-            className={`absolute top-0 w-full px-5 py-5 ${
-              isNavbarTransparent ? "bg-transparent" : "bg-white"
-            }`}
-          >
-            <div className="flex flex-col justify-center gap-5">
-              {status === 'authenticated' ? (
-                <>
-                  <h2>Hi {session.user.firstName} 👋</h2>
-                  <button
-                    type="button"
-                    onClick={() => signOut()}
-                    className={`border-2 py-3 text-lg transition-all duration-500 ease-in-out hover:font-semibold ${
-                      isNavbarTransparent
-                        ? "text-white hover:bg-black hover:text-white"
-                        : "hover:text-black"
-                    }`}
-                  >
-                    Logout
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Link
-                    href="/register"
-                    className={`border-2 py-3 text-center text-lg transition-all duration-500 ease-in-out hover:font-semibold ${
-                      isNavbarTransparent
-                        ? "text-white hover:bg-black hover:text-white"
-                        : "hover:text-black"
-                    }`}
-                  >
-                    Register
-                  </Link>
-                  <Link
-                    href="/login"
-                    className={`border-2 py-3 text-center text-lg transition-all duration-500 ease-in-out hover:font-semibold ${
-                      isNavbarTransparent
-                        ? "text-white hover:bg-black hover:text-white"
-                        : "hover:text-black"
-                    }`}
-                  >
-                    Login
-                  </Link>
-                </>
-              )}
+      {/* Aside bar */}
+        <div className="bg-white absolute top-0 -right-full min-w-[300px] h-screen overflow-hidden p-5 flex flex-col justify-between gap-3 transition-all ease-in-out transform duration-500" ref={navbarAside}> 
+          <div> 
+            <div className="flex justify-end mb-10">
+              <button onClick={handleSidebar}><CloseIcon size={25}/></button> 
             </div>
-          </div>
+            <div className="flex items-center gap-3 mb-10">
+              <div className="rounded-full w-9 h-9 overflow-hidden">
+                <img src="/assets/img/other/no-profile.png" alt="No profile picture" className="w-9"/>
+              </div>
+              <h3 className="text-lg">Muhamad Handika</h3>
+            </div> 
+            <div className="flex flex-col gap-3">
+                <div className="flex items-center gap-3">
+                  <CartIcon size={36}/>
+                  <h4 className="text-md">Cart</h4>
+                </div>
+                <div className="flex items-center gap-3">
+                  <HeartIcon size={36}/>
+                  <h4 className="text-md">Wishlist</h4>
+                </div> 
+            </div>
+          </div> 
+          {status === 'authenticated' && (
+            <button className="flex items-center gap-3"> 
+              <ExitIcon size={36} color="red"/>
+              <span className="text-md text-red-700">Logout</span>
+            </button>
+          )}
         </div>
-      )}
     </nav>
   );
 }
