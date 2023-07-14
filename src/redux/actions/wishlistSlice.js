@@ -92,10 +92,16 @@ const wishlistSlice = createSlice({
       console.log(action)
     })
     // delete wishlist item
-    builder.addCase(deleteWishlistItem.rejected, (state, action) => {
-      const { products, ...otherData } = action.payload.data
-      state.productInfo = otherData
-      state.products = products
+    builder.addCase(deleteWishlistItem.pending, (state, action) => {
+      state.products = state.products.filter((item) => (
+        item.product._id !== action.meta.arg.productId
+      ))
+    })
+    builder.addCase(deleteWishlistItem.fulfilled, (state, action) => {
+      const { products, ...otherData } = action.payload.data;
+      console.log(products)
+      state.productInfo = otherData;
+      state.products = products;
     })
   }
 })
