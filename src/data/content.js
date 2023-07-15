@@ -2,14 +2,14 @@ export const headerItems = [
   {
     id: 1,
     img: "/assets/img/header/1.jpg",
-    title: "REBEL RHYTHMS",
+    title: "Rebel Rythms",
     desc: "Unleash Your Inner Rocker with Our Exclusive Merch",
     bg: "black",
   },
   {
     id: 2,
     img: "/assets/img/header/2.jpg",
-    title: "PASSION UNLEASHED",
+    title: "Passion Unleashed",
     desc: "Unleash the Fury with our Brutal Metal Merchandise",
     bg: "bg-pink-300",
   },
