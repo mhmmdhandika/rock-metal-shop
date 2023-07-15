@@ -1,24 +1,23 @@
 "use client";
 
-import {
-  AiOutlineSearch as SearchIcon,
-  AiOutlineShoppingCart as CartIcon,
-} from "react-icons/ai";
+import { AiOutlineShoppingCart as CartIcon } from "react-icons/ai";
 import { GrLinkPrevious as LinkPreviousIcon } from "react-icons/gr";
 import {
   AiOutlineHeart as HeartIcon,
   AiOutlineClose as CloseIcon,
+  AiOutlineUserAdd as RegisterIcon,
+  AiOutlineLogin as LoginIcon,
 } from "react-icons/ai";
 import { IoExitOutline as ExitIcon } from "react-icons/io5";
 import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { createSelector } from "@reduxjs/toolkit";
+import { signOut, useSession } from "next-auth/react";
 import { useSelector } from "react-redux";
 import { useRef, useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 
 const selectCart = (state) => state.cart;
+const selectWishlist = (state) => state.wishlist;
 
 function Navbar() {
   const pathname = usePathname();
@@ -27,6 +26,7 @@ function Navbar() {
   const { data: session, status } = useSession();
 
   const cart = useSelector(selectCart);
+  const wishlist = useSelector(selectWishlist);
 
   const navbar = useRef(null);
   const navbarAside = useRef(null);
@@ -115,15 +115,18 @@ function Navbar() {
                   size={25}
                   color={isNavbarTransparent ? "white" : "black"}
                 />
-                <span className="absolute -right-3 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-blue-800 text-white">
+                <span className="absolute -right-3 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 text-white">
                   {cart.totalQuantity}
                 </span>
               </Link>
-              <Link href="/wishlists">
+              <Link href="/wishlists" className="relative">
                 <HeartIcon
                   size={25}
                   color={isNavbarTransparent ? "white" : "black"}
                 />
+                <span className="absolute -right-3 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 text-white">
+                  {wishlist.products.length - 1}
+                </span>
               </Link>
             </>
           )}
@@ -174,7 +177,7 @@ function Navbar() {
               <CloseIcon size={25} />
             </button>
           </div>
-          <div className="mb-10 flex items-center gap-3">
+          <div className="mb-10 flex items-center gap-5">
             <div className="h-9 w-9 overflow-hidden rounded-full">
               <img
                 src="/assets/img/other/no-profile.png"
@@ -185,22 +188,36 @@ function Navbar() {
             <h3 className="text-lg">Muhamad Handika</h3>
           </div>
           <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-3">
-              <CartIcon size={36} />
+            <div className="flex items-center gap-5">
+              <CartIcon size={30} />
               <h4 className="text-md">Cart</h4>
             </div>
-            <div className="flex items-center gap-3">
-              <HeartIcon size={36} />
+            <div className="flex items-center gap-5">
+              <HeartIcon size={30} />
               <h4 className="text-md">Wishlist</h4>
             </div>
           </div>
         </div>
-        {status === "authenticated" && (
-          <button onClick={handleLogout} className="flex items-center gap-3">
-            <ExitIcon size={36} color="red" />
-            <span className="text-md text-red-700">Logout</span>
-          </button>
-        )}
+        <div className="flex flex-col gap-3">
+          {status === 'unauthenticated' && (
+            <>
+              <Link href="/register" className="flex items-center gap-5">
+                <RegisterIcon size={30} />
+                <span className="text-md">Register</span>
+              </Link>
+              <Link href="/login" className="flex items-center gap-5">
+                <LoginIcon size={30} />
+                <span className="text-md">Login</span>
+              </Link>
+            </> 
+          )}
+          {status === "authenticated" && (
+            <button onClick={handleLogout} className="flex items-center gap-5">
+              <ExitIcon size={30} color="red" />
+              <span className="text-md text-red-700">Logout</span>
+            </button>
+          )}
+        </div>
       </div>
     </nav>
   );
