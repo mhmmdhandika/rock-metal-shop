@@ -5,12 +5,13 @@ import { IoSend as SendIcon } from "react-icons/io5";
 function NewsLetter() {
   return (
     <div
-      className="mb-5 bg-[#FCF5F5]"
+      className="mb-5 bg-slate-950"
       style={{
         backgroundImage: `url("/assets/img/newsletter/bg-crowd-metal.jpg"), linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))`,
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundBlendMode: "multiply",
+        backgroundAttachment: 'fixed',
       }}
     >
       <div className="section-space-x flex flex-col items-center justify-center gap-3 py-16">
