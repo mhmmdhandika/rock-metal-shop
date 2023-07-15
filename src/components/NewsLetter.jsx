@@ -18,7 +18,7 @@ function NewsLetter() {
         <p className="text-white">Get timely updates from your favorite products</p>
         <div className="flex items-center justify-center">
           <input type="email" placeholder="Your email" className="h-9 px-3" />
-          <button className="h-9 bg-teal-400 px-5 text-white">
+          <button className="h-9 bg-slate-900 px-5 text-white border-2 border-white">
             <SendIcon />
           </button>
         </div>

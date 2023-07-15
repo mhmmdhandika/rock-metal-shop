@@ -15,7 +15,7 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
 
-const selectCart = createSelector((state) => state.cart)
+const selectCart = (state) => state.cart;
 
 function Cart() {
   const dispatch = useDispatch()
@@ -192,7 +192,7 @@ function Cart() {
             </tbody>
           </table>
           <button
-            className="w-full bg-black py-2 text-xl text-white"
+            className="w-full bg-slate-900 py-2 text-xl text-white"
             onClick={handleCheckout}
           >
             CHECKOUT NOW
