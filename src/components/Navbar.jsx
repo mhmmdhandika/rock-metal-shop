@@ -13,6 +13,7 @@ import { createSelector } from '@reduxjs/toolkit'
 import { useSelector } from "react-redux";
 import { useRef, useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 const selectCart = (state) => state.cart;
 
@@ -59,6 +60,17 @@ function Navbar() {
   const handleSidebar = () => {
     navbarAside.current.classList.toggle('navbar-aside')
   };
+
+  const handleLogout = async () => {
+    const confirmLogout = await Swal.fire({
+      title: "Are you want to logout?",
+      icon: 'warning',
+      showConfirmButton: true,
+      confirmButtonText: "Logout",
+      showCancelButton: true,
+    });
+    confirmLogout.isConfirmed && signOut();
+  }
 
   return (
     <nav
@@ -149,11 +161,8 @@ function Navbar() {
         </div>
       </div>
       {/* Aside bar */}
-        <div className="bg-white absolute top-0 -right-full min-w-[300px] h-screen overflow-hidden p-5 flex flex-col justify-between gap-3 transition-all ease-in-out transform duration-500" ref={navbarAside}> 
+        <div className="bg-white absolute top-0 -right-full min-w-[300px] h-screen overflow-hidden p-5 flex flex-col justify-between gap-3 transition-all ease-in-out transform duration-500 border-l" ref={navbarAside}> 
           <div> 
-            <div className="flex justify-end mb-10">
-              <button onClick={handleSidebar}><CloseIcon size={25}/></button> 
-            </div>
             <div className="flex items-center gap-3 mb-10">
               <div className="rounded-full w-9 h-9 overflow-hidden">
                 <img src="/assets/img/other/no-profile.png" alt="No profile picture" className="w-9"/>
@@ -172,7 +181,7 @@ function Navbar() {
             </div>
           </div> 
           {status === 'authenticated' && (
-            <button className="flex items-center gap-3"> 
+            <button onClick={handleLogout} className="flex items-center gap-3"> 
               <ExitIcon size={36} color="red"/>
               <span className="text-md text-red-700">Logout</span>
             </button>
