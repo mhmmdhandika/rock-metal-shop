@@ -19,7 +19,7 @@ export default async function WishlistsPage() {
   const userWishlist = await getWishlistItems(session.user.accessToken)
 
   return (
-    <div>
+    <div className="my-5">
       <div className="section-space-x">
         {/* card products container */}
         <div className="mx-auto grid max-w-[25rem] items-center gap-2 md:mx-0 md:max-w-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -28,12 +28,12 @@ export default async function WishlistsPage() {
             userWishlist.products.map((item, index) => (
               <div
                 key={index}
-                className="group relative flex flex-col justify-center overflow-hidden bg-slate-100"
+                className="group relative flex flex-col justify-center overflow-hidden bg-slate-100 w-full h-full aspect-square"
               >
                 <img
                   src={item.product.img}
                   alt={item.product.title}
-                  className="w-full px-5"
+                  className="w-full px-5 mx-auto"
                 />
                 <div className="duration-800 ease absolute z-10 h-full w-full bg-black/30  opacity-0 transition-all group-hover:opacity-100">
                   <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">

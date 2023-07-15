@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { createSelector } from '@reduxjs/toolkit'
 import { useSession } from "next-auth/react";
 
-const selectCart = createSelector((state) => state.cart)
+const selectCart = (state) => state.cart
 
 function Product({ params }) {
  const { data: session } = useSession();
@@ -74,7 +74,7 @@ function Product({ params }) {
         />
       </div>
       <div className="flex grow flex-col gap-5 pt-10">
-        <h1 className="text-4xl font-medium capitalize md:text-6xl">
+        <h1 className="text-4xl font-medium capitalize md:text-5xl">
           {product.title}
         </h1>
         <h2 className="my-3 text-7xl font-extralight">${product.price}</h2>
