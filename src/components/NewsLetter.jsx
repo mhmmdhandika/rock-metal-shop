@@ -1,5 +1,3 @@
-'use client'
-
 import { IoSend as SendIcon } from "react-icons/io5";
 
 function NewsLetter() {
