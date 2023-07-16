@@ -35,7 +35,7 @@ function Login() {
       }}
     >
       <form
-        className="form-auth-register absolute left-1/2 top-1/2 flex w-[30rem] -translate-x-1/2 -translate-y-1/2 flex-col gap-5 bg-white p-7 text-black"
+        className="form-auth-register absolute left-1/2 top-1/2 flex min-w-[25rem] -translate-x-1/2 -translate-y-1/2 flex-col gap-5 border-2 border-white bg-black/50 p-7 text-white sm:min-w-[30rem]"
         onSubmit={handleSubmit(handleLogin)}
       >
         <h1 className="text-3xl font-light">SIGN IN</h1>
@@ -45,15 +45,17 @@ function Login() {
             type="text"
             placeholder="username"
             {...register("username", { required: true })}
+            className="bg-transparent"
           />
           {/* password */}
           <input
             type="password"
             placeholder="password"
             {...register("password", { required: true })}
+            className="bg-transparent"
           />
         </div>
-        <div className="flex flex-col gap-2 text-sm">
+        <div className="flex flex-col justify-between gap-2 text-sm sm:flex-row">
           <a href="#" className="underline">
             Forgot password?
           </a>
@@ -64,13 +66,13 @@ function Login() {
         <div className="flex justify-end gap-3">
           <Link
             href="/"
-            className="text-md bg-slate-300 px-5 py-2 font-semibold text-slate-600"
+            className="text-md border-2 border-white bg-transparent px-5 py-2 font-semibold text-white"
           >
             BACK
           </Link>
           <button
             type="submit"
-            className="text-md bg-teal-500 px-5 py-2 font-semibold text-white"
+            className="text-md border-2 border-white bg-slate-900 px-5 py-2 font-semibold text-white"
           >
             LOGIN
           </button>
