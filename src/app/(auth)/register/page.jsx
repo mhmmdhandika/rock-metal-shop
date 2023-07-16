@@ -58,10 +58,19 @@ function Register() {
   };
 
   return (
-    <div className='relative min-h-screen w-full bg-[url("https://images.pexels.com/photos/6984661/pexels-photo-6984661.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")] object-center'>
+    <div 
+      className='relative min-h-screen w-full object-center'
+      style={{
+        backgroundImage: `url("/assets/img/auth/bg-register.jpg"), linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundBlendMode: "multiply",
+        backgroundAttachment: 'fixed',
+      }}
+    >
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='form-auth-register absolute left-1/2 top-1/2 flex min-w-[25rem] -translate-x-1/2 -translate-y-1/2 flex-col gap-5 bg-white p-7 text-black'
+        className='form-auth-register absolute left-1/2 top-1/2 flex min-w-[25rem] -translate-x-1/2 -translate-y-1/2 flex-col gap-5 bg-black/60 p-7 text-stone-400 border-2 border-stone-400'
       >
         <h1 className='text-3xl font-light'>CREATE AN ACCOUNT</h1>
         <div className='grid md:grid-cols-2 gap-3'>
@@ -70,36 +79,42 @@ function Register() {
             type='text'
             placeholder='first name'
             {...register('firstName', { required: true })}
+            className="bg-transparent border-stone-400"
           />
           {/* last name */}
           <input
             type='text'
             placeholder='last name'
             {...register('lastName')}
+            className="bg-transparent border-stone-400"
           />
           {/* username */}
           <input
             type='text'
             placeholder='username'
             {...register('username', { required: true })}
+            className="bg-transparent border-stone-400"
           />
           {/* email */}
           <input
             type='email'
             placeholder='email'
             {...register('email', { required: true })}
+            className="bg-transparent border-stone-400"
           />
           {/* password */}
           <input
             type='password'
             placeholder='password'
             {...register('password', { required: true })}
+            className="bg-transparent border-stone-400"
           />
           {/* confirm password */}
           <input
             type='password'
             placeholder='confirm password'
             {...register('confirmPassword', { required: true })}
+            className="bg-transparent border-stone-400d"
           />
         </div>
         <p className='text-sm'>
@@ -109,14 +124,14 @@ function Register() {
         <div className='flex justify-end gap-3'>
           <Link
             href='/'
-            className='text-md bg-slate-300 px-5 py-2 font-semibold text-slate-600'
+            className='text-md bg-transparent px-5 py-2 font-semibold text-stone-400 border-2 border-stone-400'
           >
             BACK
           </Link>
           <button
             disabled={isLoading}
             type='submit'
-            className='text-md bg-teal-500 px-5 py-2 font-semibold text-white'
+            className='text-md bg-slate-900 border-2 border-stone-400 px-5 py-2 font-semibold text-white'
           >
             {isLoading ? 'Loading...' : 'SUBMIT'}
           </button>

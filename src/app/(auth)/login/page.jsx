@@ -24,7 +24,16 @@ function Login() {
   };
 
   return (
-    <div className='relative h-screen w-full bg-[url("https://images.pexels.com/photos/6984650/pexels-photo-6984650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")]'>
+    <div
+      className="relative h-screen w-full"
+      style={{
+        backgroundImage: `url("/assets/img/auth/bg-login.jpg"), linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundBlendMode: "multiply",
+        backgroundAttachment: "fixed",
+      }}
+    >
       <form
         className="form-auth-register absolute left-1/2 top-1/2 flex w-[30rem] -translate-x-1/2 -translate-y-1/2 flex-col gap-5 bg-white p-7 text-black"
         onSubmit={handleSubmit(handleLogin)}
