@@ -33,6 +33,7 @@ function Navbar() {
 
   const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
   const [isNavbarTransparent, setIsNavbarTransparent] = useState(false);
+  const [searchResult, setSearchResult] = useState([]);
 
   // set transparent background only in home page
   useEffect(() => {
@@ -90,21 +91,57 @@ function Navbar() {
               <LinkPreviousIcon size={20} />
             </button>
           )}
-          <input
-            className="w-full rounded-md border bg-transparent px-4 py-2 focus:outline-none"
-            type="text"
-            placeholder="Search..."
-          />
+          <div className="relative">
+            <input
+              className="w-full rounded-md border bg-transparent px-4 py-2 text-white focus:outline-none"
+              type="text"
+              placeholder="Search..."
+            />
+            {searchResult.length > 0 && (
+              <div
+                className={`absolute top-14 w-full border px-4 text-white transition-all duration-300 ease-in-out ${
+                  isNavbarTransparent
+                    ? "bg-transparent text-white"
+                    : "bg-white text-black"
+                }`}
+              >
+                {searchResult.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={`/product/${item._id}`}
+                    className={`hover:text-md block py-3 hover:font-bold hover:underline 
+                        ${
+                          index !== searchResult.length - 1 &&
+                          `border-b ${
+                            isNavbarTransparent
+                              ? "border-white"
+                              : "border-black"
+                          }`
+                        }
+                        ${
+                          isNavbarTransparent
+                            ? "bg-transparent text-white"
+                            : "bg-white text-black"
+                        }
+                      `}
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
         {/* brand name */}
         <div className="hidden text-center md:block">
-          <h1
+          <Link
+            href="/"
             className={`text-2xl font-medium ${
               isNavbarTransparent ? "text-white" : "text-black"
             }`}
           >
             Thunderstone Emporium
-          </h1>
+          </Link>
         </div>
         {/* Toggle Bar */}
         <div className="flex flex-grow-0 items-center justify-end gap-5">
@@ -168,55 +205,60 @@ function Navbar() {
       </div>
       {/* Aside bar */}
       <div
-        className="absolute -right-full top-0 flex h-screen min-w-[300px] transform flex-col justify-between gap-3 overflow-hidden border-l bg-white p-5 transition-all duration-500 ease-in-out"
+        className="absolute right-0 top-0 h-screen w-0 transform overflow-hidden bg-white transition-all duration-500 ease-in-out"
         ref={navbarAside}
       >
-        <div>
-          <div className="flex justify-end mb-3">
-            <button onClick={handleSidebar}>
-              <CloseIcon size={25} />
-            </button>
-          </div>
-          <div className="mb-10 flex items-center gap-5">
-            <div className="h-9 w-9 overflow-hidden rounded-full">
-              <img
-                src="/assets/img/other/no-profile.png"
-                alt="No profile picture"
-                className="w-9"
-              />
+        <div className="flex transform flex-col justify-between gap-3 overflow-hidden border-l p-5 transition-all duration-500 ease-in-out">
+          <div>
+            <div className="mb-3 flex justify-end">
+              <button onClick={handleSidebar}>
+                <CloseIcon size={25} />
+              </button>
             </div>
-            <h3 className="text-lg">Muhamad Handika</h3>
+            <div className="mb-10 flex items-center gap-5">
+              <div className="h-9 w-9 overflow-hidden rounded-full">
+                <img
+                  src="/assets/img/other/no-profile.png"
+                  alt="No profile picture"
+                  className="w-9"
+                />
+              </div>
+              <h3 className="text-lg">Muhamad Handika</h3>
+            </div>
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center gap-5">
+                <CartIcon size={30} />
+                <h4 className="text-md">Cart</h4>
+              </div>
+              <div className="flex items-center gap-5">
+                <HeartIcon size={30} />
+                <h4 className="text-md">Wishlist</h4>
+              </div>
+            </div>
           </div>
           <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-5">
-              <CartIcon size={30} />
-              <h4 className="text-md">Cart</h4>
-            </div>
-            <div className="flex items-center gap-5">
-              <HeartIcon size={30} />
-              <h4 className="text-md">Wishlist</h4>
-            </div>
+            {status === "unauthenticated" && (
+              <>
+                <Link href="/register" className="flex items-center gap-5">
+                  <RegisterIcon size={30} />
+                  <span className="text-md">Register</span>
+                </Link>
+                <Link href="/login" className="flex items-center gap-5">
+                  <LoginIcon size={30} />
+                  <span className="text-md">Login</span>
+                </Link>
+              </>
+            )}
+            {status === "authenticated" && (
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-5"
+              >
+                <ExitIcon size={30} color="red" />
+                <span className="text-md text-red-700">Logout</span>
+              </button>
+            )}
           </div>
-        </div>
-        <div className="flex flex-col gap-3">
-          {status === 'unauthenticated' && (
-            <>
-              <Link href="/register" className="flex items-center gap-5">
-                <RegisterIcon size={30} />
-                <span className="text-md">Register</span>
-              </Link>
-              <Link href="/login" className="flex items-center gap-5">
-                <LoginIcon size={30} />
-                <span className="text-md">Login</span>
-              </Link>
-            </> 
-          )}
-          {status === "authenticated" && (
-            <button onClick={handleLogout} className="flex items-center gap-5">
-              <ExitIcon size={30} color="red" />
-              <span className="text-md text-red-700">Logout</span>
-            </button>
-          )}
         </div>
       </div>
     </nav>
