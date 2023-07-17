@@ -74,7 +74,7 @@ function Footer() {
 
   return (
     <footer>
-      <div className="section-space-x grid items-center justify-center gap-10 px-5 py-5 md:grid-cols-3">
+      <div className="section-space-x grid justify-center gap-10 px-5 py-5 md:grid-cols-3">
         <div className="flex flex-col justify-center gap-5 md:justify-start">
           <h2 className="text-3xl font-semibold">Thunderstone Emporium</h2>
           <p className="text-sm">
