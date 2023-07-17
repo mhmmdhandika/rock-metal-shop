@@ -208,7 +208,7 @@ function Navbar() {
         className="absolute right-0 top-0 h-screen w-0 transform overflow-hidden bg-white transition-all duration-500 ease-in-out"
         ref={navbarAside}
       >
-        <div className="flex transform flex-col justify-between gap-3 overflow-hidden border-l p-5 transition-all duration-500 ease-in-out">
+        <div className="h-full flex transform flex-col justify-between gap-3 overflow-hidden border-l p-5 transition-all duration-500 ease-in-out">
           <div>
             <div className="mb-3 flex justify-end">
               <button onClick={handleSidebar}>
