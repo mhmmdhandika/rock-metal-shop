@@ -6,6 +6,7 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+      index: true,
     },
     desc: {
       type: String,
@@ -24,15 +25,18 @@ const ProductSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    inStock: {
-      type: Boolean,
-      default: true,
-    },
+    stock: [
+      {
+        color: { type: String, required: true },
+        size: { type: String, required: true },
+        quantity: { type: Number, required: true, default: 0 },
+        price: { type: Number, required: true },
+      }
+    ]
   },
   { timestamps: true }
 );
 
-const Product =
-  mongoose.models.Product || mongoose.model('Product', ProductSchema);
+const Product = mongoose.models.Product || mongoose.model('Product', ProductSchema);
 
 export default Product;
