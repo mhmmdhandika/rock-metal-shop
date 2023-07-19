@@ -87,9 +87,9 @@ function Navbar() {
         {/* back navigation and search bar */}
         <div className="flex w-full items-center justify-start gap-3 sm:w-auto">
           {pathname !== "/" && (
-            <button type="button" onClick={() => router.back()}>
+            <Link href="/" className="block">
               <LinkPreviousIcon size={20} />
-            </button>
+            </Link>
           )}
           <div className="relative">
             <input
