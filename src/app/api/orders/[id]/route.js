@@ -25,7 +25,9 @@ export async function GET(request, context) {
 
     const orders = await Order.find({ userId: paramId });
 
-    return NextResponse.json(orders);
+    return NextResponse.json({
+      data: orders,
+    });
   } catch (error) {
     return NextResponse.json(
       { error: error.message },
@@ -57,7 +59,9 @@ export async function PUT(request, context) {
       { new: true }
     );
 
-    return NextResponse.json(updatedOrder);
+    return NextResponse.json({
+      data: updatedCart,
+    });
   } catch (error) {
     return NextResponse.json(
       { error: error.message },
@@ -82,9 +86,11 @@ export async function DELETE(request, context) {
       });
     }
 
-    await Order.findByIdAndDelete(paramId);
+    const updatedOrder = await Order.findByIdAndDelete(paramId);
 
-    return NextResponse.json('Order has been deleted...');
+    return NextResponse.json({
+      data: updatedOrder,
+    });
   } catch (error) {
     return NextResponse.json(
       { error: error.message },

@@ -20,7 +20,9 @@ export async function GET(request) {
     }
 
     const orders = await Order.find();
-    return NextResponse.json(orders);
+    return NextResponse.json({
+      data: orders,
+    });
   } catch (error) {
     return NextResponse.json(
       { error: error.message },
@@ -49,7 +51,9 @@ export async function POST(request) {
 
     const savedOrder = await Order.create(body);
 
-    return NextResponse.json(savedOrder);
+    return NextResponse.json({
+      data: savedOrder,
+    });
   } catch (error) {
     return NextResponse.json(
       { error: error.message },

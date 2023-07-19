@@ -20,15 +20,14 @@ function Register() {
     // exclude confirmPassword
     const { confirmPassword, ...otherUserData } = data;
 
-    const res = await fetch("/api/auth/register", {
+    const response = await fetch("/api/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(otherUserData),
     });
-
-    const resData = await res.json();
+    const result = await response.json();
 
     // is confirm password correct as original password
     if (data.password !== data.confirmPassword) {
@@ -39,7 +38,7 @@ function Register() {
       });
     }
 
-    if (resData) {
+    if (result) {
       const resLogin = await loginUser({
         email: data.email,
         password: data.password,

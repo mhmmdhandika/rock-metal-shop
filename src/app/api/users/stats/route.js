@@ -26,7 +26,7 @@ export async function GET(request) {
       { $group: { _id: '$month', total: { $sum: 1 } } },
     ]);
 
-    return NextResponse.json(data);
+    return NextResponse.json({ data });
   } catch (error) {
     return NextResponse.json(
       { error: error.message },

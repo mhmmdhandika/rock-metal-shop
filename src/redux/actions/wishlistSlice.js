@@ -10,7 +10,8 @@ export const getAllWishlist = createAsyncThunk(
           token: `Bearer ${token}`
         }
       })
-      return await response.json()
+      const result = await response.json();
+      return result.data;
     } catch (error) {
       return rejectWithValue({
         message: error.message,
@@ -32,7 +33,8 @@ export const addWishlistItem = createAsyncThunk(
         },
         body: JSON.stringify({ productId })
       })
-      return await response.json()
+      const result = await response.json();
+      return result.data;
     } catch (error) {
       return rejectWithValue({
         message: error.message,
@@ -52,7 +54,8 @@ export const deleteWishlistItem = createAsyncThunk(
           token: `Bearer ${token}`
         }
       })
-      return await response.json()
+      const result = await response.json();
+      return result.data;
     } catch (error) {
       return rejectWithValue({
         message: error.message,
@@ -72,7 +75,7 @@ const wishlistSlice = createSlice({
   extraReducers: (builder) => {
     // get all wishlist
     builder.addCase(getAllWishlist.fulfilled, (state, action) => {
-      const { products, ...otherData } = action.payload.data
+      const { products, ...otherData } = action.payload;
       state.productInfo = otherData
       state.products = products
     })
@@ -84,7 +87,7 @@ const wishlistSlice = createSlice({
       })
     })
     builder.addCase(addWishlistItem.fulfilled, (state, action) => {
-      const { products, ...otherData } = action.payload.data;
+      const { products, ...otherData } = action.payload;
       state.productInfo = otherData;
       state.products = products;
     })
@@ -98,7 +101,7 @@ const wishlistSlice = createSlice({
       ))
     })
     builder.addCase(deleteWishlistItem.fulfilled, (state, action) => {
-      const { products, ...otherData } = action.payload.data;
+      const { products, ...otherData } = action.payload;
       console.log(products)
       state.productInfo = otherData;
       state.products = products;

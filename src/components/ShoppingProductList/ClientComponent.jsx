@@ -1,6 +1,5 @@
 "use client";
 
-import axios from "axios";
 import { useState, useEffect } from "react";
 import Product from "@/components/ShoppingProductList/Product";
 
@@ -16,8 +15,11 @@ function ShoppingProductList({ category, filters, sort }) {
         ? `${ORIGIN_URL}/api/products?category=${category}`
         : `${ORIGIN_URL}/api/products`;
       try {
-        const response = await axios.get(url);
-        setProducts(response.data);
+        const response = await fetch(url, {
+          method: 'GET'
+        });
+        const result = await response.json();
+        setProducts(result.data);
       } catch (error) {
         console.log(error);
       }

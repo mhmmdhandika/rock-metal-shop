@@ -1,6 +1,5 @@
 "use client";
 
-import { publicRequest } from "@/axios/requestMethods";
 import { createSelector } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
@@ -34,17 +33,13 @@ function Cart() {
         id: product._id,
         quantity: product.quantity,
       }));
-      
-      const response = await publicRequest.post(
-        "/api/stripe/payment",
-        checkoutData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(selectedProducts),
-        }
-      );
+      const response = await fetch("/api/stripe/payment", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(selectedProducts),
+      });
       window.location.assign(response.data.url)
     } catch (error) {
       console.error(error);

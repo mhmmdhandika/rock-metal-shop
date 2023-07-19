@@ -35,7 +35,9 @@ export async function POST(request) {
       password: hashedPassword,
     });
 
-    return NextResponse.json({ ...newUser._doc });
+    return NextResponse.json({
+      data: ...newUser._doc
+    });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }

@@ -25,7 +25,9 @@ export async function GET(request) {
       ? await User.find().sort({ _id: -1 }).limit(newestQuery)
       : await User.find();
 
-    return NextResponse.json(users);
+    return NextResponse.json({
+      data: users,
+    });
   } catch (error) {
     return NextResponse.json(
       { error: error.message },

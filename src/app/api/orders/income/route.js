@@ -1,12 +1,12 @@
-import { NextResponse } from 'next/server';
-import Order from '@/models/Order';
-import connectToMongoDB from '@/lib/mongodb';
-import { verifyTokenAndAdmin } from '@/helpers/verifyToken';
-import VerifyTokenError from '@/errors/VerifyTokenError';
+import { NextResponse } from "next/server";
+import Order from "@/models/Order";
+import connectToMongoDB from "@/lib/mongodb";
+import { verifyTokenAndAdmin } from "@/helpers/verifyToken";
+import VerifyTokenError from "@/errors/VerifyTokenError";
 
 // GET MONTHLY INCOME
 export async function GET(request) {
-  const token = request.headers.get('token');
+  const token = request.headers.get("token");
   console.log(token);
 
   try {
@@ -33,19 +33,21 @@ export async function GET(request) {
       },
       {
         $project: {
-          month: { $month: '$createdAt' },
-          sales: '$amount',
+          month: { $month: "$createdAt" },
+          sales: "$amount",
         },
       },
       {
         $group: {
-          _id: '$month',
-          total: { $sum: '$sales' },
+          _id: "$month",
+          total: { $sum: "$sales" },
         },
       },
     ]);
 
-    return NextResponse.json(income);
+    return NextResponse.json({
+      data: income,
+    });
   } catch (error) {
     return NextResponse.json(
       { error: error.message },
