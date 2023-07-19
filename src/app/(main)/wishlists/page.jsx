@@ -31,7 +31,7 @@ export default async function WishlistsPage() {
                 className="group relative flex flex-col justify-center overflow-hidden bg-slate-100 w-full h-full aspect-square"
               >
                 <img
-                  src={item.product.img}
+                  src={item.product.img[0]}
                   alt={item.product.title}
                   className="w-full px-5 mx-auto"
                 />
