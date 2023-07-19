@@ -1,15 +1,15 @@
-import { NextResponse } from 'next/server';
-import User from '@/models/User';
-import connectToMongoDB from '@/lib/mongodb';
+import { NextResponse } from "next/server";
+import User from "@/models/User";
+import connectToMongoDB from "@/lib/mongodb";
 import {
   verifyTokenAndAdmin,
   verifyTokenAndAuthorization,
-} from '@/helpers/verifyToken';
-import VerifyTokenError from '@/errors/VerifyTokenError';
+} from "@/helpers/verifyToken";
+import VerifyTokenError from "@/errors/VerifyTokenError";
 
 // GET A USER
 export async function GET(request, context) {
-  const token = request.headers.get('token');
+  const token = request.headers.get("token");
   const paramId = context.params.id;
 
   try {
@@ -26,7 +26,9 @@ export async function GET(request, context) {
     const user = await User.findById(paramId);
     const { password, ...userExcludePassword } = user;
 
-    return NextResponse.json(userExcludePassword);
+    return NextResponse.json({
+      data: userExcludePassword,
+    });
   } catch (error) {
     return NextResponse.json(
       { error: error.message },
@@ -40,7 +42,7 @@ export async function PUT(request, context) {
   try {
     await connectToMongoDB();
 
-    const token = request.headers.get('token');
+    const token = request.headers.get("token");
     const paramId = context.params.id;
 
     // verify token
@@ -60,7 +62,9 @@ export async function PUT(request, context) {
       new: true,
     });
 
-    return NextResponse.json(updatedUser);
+    return NextResponse.json({
+      data: updatedUser,
+    });
   } catch (error) {
     return NextResponse.json(
       { error: error.message },
@@ -71,7 +75,7 @@ export async function PUT(request, context) {
 
 // DELETE A USER
 export async function DELETE(request, context) {
-  const token = request.headers.get('token');
+  const token = request.headers.get("token");
   const paramId = context.params.id;
 
   try {
@@ -83,9 +87,11 @@ export async function DELETE(request, context) {
       });
     }
 
-    await User.findByIdAndDelete(paramId);
+    const updatedUser = await User.findByIdAndDelete(paramId);
 
-    return NextResponse.json({ result: 'User has been deleted' });
+    return NextResponse.json({
+      data: updatedUser,
+    });
   } catch (error) {
     return NextResponse.json(
       { error: error.message },

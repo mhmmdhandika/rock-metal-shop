@@ -23,7 +23,9 @@ export async function GET(request) {
       .populate("products.product")
       .exec();
 
-    return NextResponse.json(carts);
+    return NextResponse.json({
+      data: carts,
+    });
   } catch (error) {
     return NextResponse.json(
       { error: error.message },
@@ -87,7 +89,9 @@ export async function POST(request) {
       .populate("products.product")
       .exec();
 
-    return NextResponse.json(getUpdateCartPopulated);
+    return NextResponse.json({
+      data: getUpdateCartPopulated,
+    });
   } catch (error) {
     return NextResponse.json(
       { error: error.message },

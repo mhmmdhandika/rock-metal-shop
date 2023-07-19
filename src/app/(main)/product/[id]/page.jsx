@@ -1,9 +1,8 @@
 "use client";
 
-import { publicRequest, userRequest } from "@/axios/requestMethods";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewItemCart, addProduct, getAllCartItem } from "@/redux/actions/cartSlice";
+import { addNewItemCart } from "@/redux/actions/cartSlice";
 import Swal from "sweetalert2";
 import { createSelector } from '@reduxjs/toolkit'
 import { useSession } from "next-auth/react";
@@ -26,8 +25,11 @@ function Product({ params }) {
   useEffect(() => {
     const getProduct = async () => {
       try {
-        const response = await publicRequest.get(`/api/products/${idProduct}`);
-        setProduct(response.data);
+        const response = await fetch(`/api/products/${idProduct}`, {
+          method: 'GET',
+        });
+        const result = await response.json();
+        setProduct(result.data);
       } catch (error) {
         console.log(error);
       }

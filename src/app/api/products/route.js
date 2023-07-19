@@ -32,7 +32,9 @@ export async function GET(request) {
       }
     }
 
-    return NextResponse.json(products);
+    return NextResponse.json({
+      data: products,
+    });
   } catch (error) {
     return NextResponse.json(
       { error: error.message },
@@ -41,6 +43,7 @@ export async function GET(request) {
   }
 }
 
+// FIXME:
 // ADD NEW PRODUCT
 export async function POST(request) {
   const token = request.headers.get('token');
@@ -59,7 +62,9 @@ export async function POST(request) {
 
     const newProduct = await Product.create(body);
 
-    return NextResponse.json(newProduct);
+    return NextResponse.json({
+      data: newProduct,
+    });
   } catch (error) {
     return NextResponse.json(
       { error: error.message },

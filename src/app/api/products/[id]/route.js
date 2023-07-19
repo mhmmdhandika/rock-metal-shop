@@ -1,8 +1,8 @@
-import { NextResponse } from 'next/server';
-import Product from '@/models/Product';
-import connectToMongoDB from '@/lib/mongodb';
-import { verifyTokenAndAdmin } from '@/helpers/verifyToken';
-import VerifyTokenError from '@/errors/VerifyTokenError';
+import { NextResponse } from "next/server";
+import Product from "@/models/Product";
+import connectToMongoDB from "@/lib/mongodb";
+import { verifyTokenAndAdmin } from "@/helpers/verifyToken";
+import VerifyTokenError from "@/errors/VerifyTokenError";
 
 // GET A PRODUCT
 export async function GET(request, context) {
@@ -13,7 +13,9 @@ export async function GET(request, context) {
 
     const product = await Product.findById(paramId);
 
-    return NextResponse.json(product);
+    return NextResponse.json({
+      data: product,
+    });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
@@ -24,7 +26,7 @@ export async function PUT(request, context) {
   try {
     await connectToMongoDB();
 
-    const token = request.headers.get('token');
+    const token = request.headers.get("token");
     const paramId = context.params.id;
 
     // verify token
@@ -40,7 +42,9 @@ export async function PUT(request, context) {
       new: true,
     });
 
-    return NextResponse.json(updatedUser);
+    return NextResponse.json({
+      data: updatedUser,
+    });
   } catch (error) {
     return NextResponse.json(
       { error: error.message },
@@ -49,9 +53,9 @@ export async function PUT(request, context) {
   }
 }
 
-// DELETE A USER
+// DELETE A DELETE
 export async function DELETE(request, context) {
-  const token = request.headers.get('token');
+  const token = request.headers.get("token");
   const paramId = context.params.id;
 
   try {
@@ -61,9 +65,11 @@ export async function DELETE(request, context) {
       throw new VerifyTokenError(userData.message, { status: userData.status });
     }
 
-    await Product.findByIdAndDelete(paramId);
+    const updatedProduct = await Product.findByIdAndDelete(paramId);
 
-    return NextResponse.json({ result: 'Product has been deleted' });
+    return NextResponse.json({
+      data: updatedProduct,
+    });
   } catch (error) {
     return NextResponse.json(
       { error: error.message },

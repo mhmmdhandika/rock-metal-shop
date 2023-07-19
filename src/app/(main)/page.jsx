@@ -4,7 +4,7 @@ import ShoppingProductListServer from "@/components/ShoppingProductList/ServerCo
 import ShoppingProductListLoading from "@/components/ShoppingProductList/Loading";
 import Loading from "@/components/Loading";
 import Link from "next/link";
-import { AiOutlineArrowRight as ArrowRight } from 'react-icons/ai'
+import { AiOutlineArrowRight as ArrowRight } from "react-icons/ai";
 
 export default function Home() {
   return (
@@ -12,14 +12,17 @@ export default function Home() {
       <Suspense fallback={<Loading />}>
         <Header />
       </Suspense>
-        <Suspense fallback={<ShoppingProductListLoading />}> 
-        <div className="section-space-x mt-5 flex justify-between items-center">
+      <Suspense fallback={<ShoppingProductListLoading />}>
+        <div className="section-space-x mt-5 flex items-center justify-between">
           <h2 className="text-xl">Featured products</h2>
-          <Link href="/products" className="py-1 px-2 text-lg flex items-center gap-2 hover:underline">Show all <ArrowRight size={15}/></Link>
+          <Link
+            href="/products"
+            className="flex items-center gap-2 px-2 py-1 text-lg hover:underline"
+          >
+            Show all <ArrowRight size={15} />
+          </Link>
         </div>
-        <ShoppingProductListServer
-          limit={12}
-        />
+        <ShoppingProductListServer limit={12} />
       </Suspense>
     </>
   );

@@ -1,4 +1,3 @@
-import { userRequest } from "@/axios/requestMethods";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Swal from "sweetalert2";
 
@@ -6,8 +5,14 @@ export const getAllCartItem = createAsyncThunk(
   "cart/getAllCartItem",
   async ({ token }, { rejectWithValue }) => {
     try {
-      const response = await userRequest(token).get("/api/cart");
-      return response.data;
+      const response = await fetch('/api/cart', {
+        method: 'GET',
+        headers: {
+          token: `Bearer ${token}`,
+        },
+      });
+      const result = await response.json();
+      return result.data;
     } catch (error) {
       return rejectWithValue({
         message: error.message,
@@ -21,13 +26,21 @@ export const addNewItemCart = createAsyncThunk(
   "cart/addNewItemCart",
   async ({ token, newItem }, { rejectWithValue }) => {
     try {
-      const response = await userRequest(token).post("/api/cart", {
-        productId: newItem._id,
-        quantity: newItem.quantity,
-        size: newItem.size,
-        color: newItem.color
+      const response = await fetch('/api/cart', {
+        method: 'POST',
+        headers: {
+          token: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          productId: newItem._id,
+          quantity: newItem.quantity,
+          size: newItem.size,
+          color: newItem.color
+        })
       });
-      return response.data;
+      const result = await response.json();
+      return result.data;
     } catch (error) {
       return rejectWithValue({
         message: error.message,
@@ -41,8 +54,14 @@ export const deleteItemCart = createAsyncThunk(
   "cart/deleteItemCart",
   async ({ token, itemId }, { rejectWithValue }) => {
     try {
-      const response = await userRequest(token).delete(`/api/cart-item/${itemId}`)
-      return response.data
+      const response = await fetch(`/api/cart-item/${itemId}`, {
+        method: 'DELETE',
+        headers: {
+          token: `Bearer ${token}`,
+        }
+      })
+      const result = await response.json();
+      return resul.data;
     } catch (error) {
       return rejectWithValue({
         message: error.message,
@@ -56,8 +75,12 @@ export const updateQuantityItemCart = createAsyncThunk(
   "cart/updateQuantityItemCart",
   async ({ token, itemId, operation }, { rejectWithValue }) => {
     try {
-      const response = await userRequest(token).post(`/api/cart-item/${itemId}?operation=${operation}`)
-      return response.data
+      // FIXME: change method to put
+      const response = await fetch(`/api/cart-item/${itemId}?operation={operation}`, {
+        method: 'POST'
+      })
+      const result = await response.json();
+      return result.data;
     } catch (error) {
       return rejectWithValue({
         message: error.message,
