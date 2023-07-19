@@ -29,6 +29,7 @@ function Product({ params }) {
           method: 'GET',
         });
         const result = await response.json();
+        console.log(result)
         setProduct(result.data);
       } catch (error) {
         console.log(error);
@@ -69,11 +70,9 @@ function Product({ params }) {
   return (
     <div className="section-space-x grid gap-10 px-5 mb-10 md:grid-cols-2">
       <div className="relative aspect-square overflow-hidden md:sticky md:top-20">
-        <img
-          src={product.img[0]} 
-          alt={product.title}
-          className="h-full w-full object-cover object-center"
-        />
+        {product.img && product.img[0] && (
+          <img src={product.img[0]} alt={product.title} className="h-full w-full object-cover object-center" />
+        )}
       </div>
       <div className="flex grow flex-col gap-5 pt-10">
         <h1 className="text-4xl font-medium capitalize md:text-5xl">
