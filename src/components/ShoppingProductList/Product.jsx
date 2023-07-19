@@ -8,7 +8,7 @@ function Product({ item }) {
       className="group relative flex flex-col justify-center overflow-hidden bg-slate-100"
     >
       <Image 
-        src={item.img} 
+        src={item.img[0]} 
         alt={item.title}
         width={500}
         height={500}

@@ -68,7 +68,7 @@ function Product({ params }) {
     <div className="section-space-x grid gap-10 px-5 mb-10 md:grid-cols-2">
       <div className="relative aspect-square overflow-hidden md:sticky md:top-20">
         <img
-          src={product.img} 
+          src={product.img[0]} 
           alt={product.title}
           className="h-full w-full object-cover object-center"
         />
@@ -83,7 +83,7 @@ function Product({ params }) {
           <div className="flex items-center gap-14">
             {/* color option */}
             <div className="flex items-center gap-3">
-              {product?.color?.map((item, index) => (
+              {product?.colors?.map((item, index) => (
                 <div
                   key={index}
                   className={`h-10 w-10 rounded-full ${
@@ -101,7 +101,7 @@ function Product({ params }) {
               <span className="mr-3 text-lg">Size</span>
               <select onChange={(e) => setSize(e.target.value)}>
                 <option>Select size</option>
-                {product?.size?.map((item, index) => (
+                {product?.sizes?.map((item, index) => (
                   <option value={item} key={index}>{item}</option>
                 ))}
               </select>
