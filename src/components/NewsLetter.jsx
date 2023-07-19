@@ -3,12 +3,12 @@ import { IoSend as SendIcon } from "react-icons/io5";
 function NewsLetter() {
   return (
     <div
-      className="mb-5 bg-slate-950"
+      className="mb-5"
       style={{
-        backgroundImage: `url("/assets/img/newsletter/bg-crowd-metal.jpg"), linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/assets/img/newsletter/bg-crowd-metal.jpg")`,
         backgroundPosition: "center",
         backgroundSize: "cover",
-        backgroundBlendMode: "multiply",
+        backgroundColor: '#161b1d',
         backgroundAttachment: 'fixed',
       }}
     >
