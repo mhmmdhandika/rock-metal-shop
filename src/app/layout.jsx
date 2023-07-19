@@ -1,6 +1,5 @@
 import NextAuthProvider from "@/components/NextAuthProvider";
 import "@/style/globals.css";
-import { Lato } from "next/font/google";
 import localFont from "next/font/local";
 import ReduxClientProvider from "@/components/ReduxClientProvider";
 import FirstUserRequest from "@/components/FirstUserRequest";
@@ -8,12 +7,6 @@ import FirstUserRequest from "@/components/FirstUserRequest";
 const snorkad = localFont({
   src: "../../public/assets/fonts/snorkad/snorkad-regular.otf",
   display: "fallback",
-  fallback: ["system-ui", "arial"],
-});
-
-const lato = Lato({
-  subsets: ["latin"],
-  weight: ["300", "400", "700"],
   fallback: ["system-ui", "arial"],
 });
 
