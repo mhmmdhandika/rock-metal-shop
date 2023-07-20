@@ -38,7 +38,11 @@ function Product({ params }) {
     if (selectedItem) {
       setSelectedItemPrice(selectedItem.price);
       setSelectedItemQuantity(selectedItem.quantity);
-    }
+    } else {
+      setSelectedItemPrice(null);
+      setSelectedItemQuantity(null);
+    };
+    console.log(size, color)
   }, [size, color]);
 
   useEffect(() => {
@@ -55,6 +59,14 @@ function Product({ params }) {
     };
     getProduct();
   }, [idProduct]);
+
+  const handleSelectColor = (item) => {
+    setColor(item);
+  };
+
+  const handleSelectSize = (value) => {
+    setSize(value);
+  };
 
   const handleQuantity = (type) => {
     if (color === '' || size === '') {
@@ -132,15 +144,15 @@ function Product({ params }) {
                   style={{
                     backgroundColor: item,
                   }}
-                  onClick={() => setColor(item)}
+                  onClick={() => handleSelectColor(item)}
                 ></div>
               ))}
             </div>
             {/* size option */}
             <div>
               <span className="mr-3 text-lg">Size</span>
-              <select onChange={(e) => setSize(e.target.value)}>
-                <option>Select size</option>
+              <select onChange={(e) => handleSelectSize(e.target.value)}>
+                <option value="">Select size</option>
                 {product?.sizes?.map((item, index) => (
                   <option value={item} key={index}>{item}</option>
                 ))}
