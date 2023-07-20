@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth/next";
 import nextAuthOptions from '@/options/next-auth';
-import ActionButtons from '@/components/ShoppingProductList/ActionButtons'
+import ActionButtons from '@/components/ShoppingProductList/ActionButtons';
+import { redirect } from 'next/navigation';
 
 const { NEXT_PUBLIC_ORIGIN_URL } = process.env
 
@@ -16,8 +17,13 @@ async function getWishlistItems(token) {
 }
 
 export default async function WishlistsPage() { 
-  const session = await getServerSession(nextAuthOptions)
-  const userWishlist = await getWishlistItems(session.user.accessToken)
+  const session = await getServerSession(nextAuthOptions); 
+
+  if (!session) {
+    redirect('/login');
+  }
+
+   const userWishlist = await getWishlistItems(session?.user.accessToken);
 
   return (
     <div className="my-5">
