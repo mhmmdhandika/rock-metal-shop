@@ -13,7 +13,7 @@ import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { useSelector } from "react-redux";
 import { useRef, useState, useEffect } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Swal from "sweetalert2";
 
 const selectCart = (state) => state.cart;
@@ -21,7 +21,6 @@ const selectWishlist = (state) => state.wishlist;
 
 function Navbar() {
   const pathname = usePathname();
-  const router = useRouter();
 
   const { data: session, status } = useSession();
 
@@ -93,7 +92,7 @@ function Navbar() {
           )}
           <div className="relative">
             <input
-              className="w-full rounded-md border bg-transparent px-4 py-2 text-white focus:outline-none"
+              className={`w-full rounded-md border bg-transparent px-4 py-2 focus:outline-none ${isNavbarTransparent ? 'text-white' : 'text-black'}`}
               type="text"
               placeholder="Search..."
             />
