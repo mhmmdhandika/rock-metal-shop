@@ -1,5 +1,6 @@
 import { getServerSession } from "next-auth/next";
 import nextAuthOptions from '@/options/next-auth';
+import ActionButtons from '@/components/ShoppingProductList/ActionButtons'
 
 const { NEXT_PUBLIC_ORIGIN_URL } = process.env
 
@@ -40,7 +41,7 @@ export default async function WishlistsPage() {
                     <h1 className="mb-2 text-center text-lg font-semibold text-white">
                       {item.product.title}
                     </h1>
-                    {/* TODO: add action buttons */}
+                    <ActionButtons itemId={item.product._id} product={item.product} />
                   </div>
                 </div>
               </div>
