@@ -42,7 +42,6 @@ function Product({ params }) {
       setSelectedItemPrice(null);
       setSelectedItemQuantity(null);
     };
-    console.log(size, color)
   }, [size, color]);
 
   useEffect(() => {
@@ -78,7 +77,14 @@ function Product({ params }) {
       if (type === "dec") {
         quantity > 1 && setQuantity(quantity - 1);
       } else {
-        setQuantity(quantity + 1);
+        if (quantity >= selectedItemQuantity) {
+          Swal.fire({
+            title: 'Out of stock',
+            icon: 'warning',
+          })
+        } else {
+          setQuantity(quantity + 1);
+        }
       }
     }
   };
