@@ -23,7 +23,7 @@ export default async function WishlistsPage() {
     redirect('/login');
   }
 
-   const userWishlist = await getWishlistItems(session?.user.accessToken);
+  const userWishlist = await getWishlistItems(session?.user.accessToken);
 
   return (
     <div className="my-5">
