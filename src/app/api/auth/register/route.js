@@ -36,7 +36,7 @@ export async function POST(request) {
     });
 
     return NextResponse.json({
-      data: ...newUser._doc
+      data: newUser._doc,
     });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 400 });
