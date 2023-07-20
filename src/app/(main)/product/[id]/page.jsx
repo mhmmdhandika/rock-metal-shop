@@ -24,6 +24,15 @@ function Product({ params }) {
   const [selectedItemPrice, setSelectedItemPrice] = useState(null);
   const [selectedItemQuantity, setSelectedItemQuantity] = useState(null);
 
+  const getFormattedPriceRange = () => {
+    if (product?.stock) {
+      const prices =  product?.stock.map((item) => item.price);
+      const minPrice = Math.min(...prices);
+      const maxPrice = Math.max(...prices);
+      return `$${minPrice} - $${maxPrice}`;
+    }
+  };
+
   useEffect(() => {
     const selectedItem = product?.stock && product?.stock.find((item) => item.color === color && item.size === size);
     if (selectedItem) {
@@ -39,7 +48,6 @@ function Product({ params }) {
           method: 'GET',
         });
         const result = await response.json();
-        console.log(result)
         setProduct(result.data);
       } catch (error) {
         console.log(error);
@@ -95,16 +103,16 @@ function Product({ params }) {
         <h1 className="text-4xl font-medium capitalize md:text-5xl">
           {product.title}
         </h1>
-        <h2 className="my-3 text-7xl font-extralight">${product.price}</h2>
+        <h2 className="my-3 text-7xl font-extralight" style={{ wordSpacing: '-15px' }}>{getFormattedPriceRange()}</h2>
         <div dangerouslySetInnerHTML={{ __html: product.desc }} className="my-3 product-desc" />
         <div className="flex gap-5 items-center">
           {selectedItemQuantity && selectedItemPrice ? (
             <> 
               <div>
-                Stock: {selectedItemQuantity === null ? 'Select color and size first' : selectedItemQuantity}
+                Stock: <span className="font-semibold">{selectedItemQuantity}</span> 
               </div>
               <div>
-                Price: {selectedItemPrice === null ? 'Select color and size first' : `$${selectedItemPrice}`}
+                Price: <span className="font-semibold">{`$${selectedItemPrice}`}</span>
               </div>
             </>
           ) : (
