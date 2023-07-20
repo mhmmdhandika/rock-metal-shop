@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { loadStripe } from "@stripe/stripe-js";
@@ -27,7 +27,18 @@ function Cart() {
     if (status === 'unauthenticated') {
       router.push('/login');
     };
-  }, [])
+  }, []);
+
+  const getTotalPrice = () => {
+    let total = 0;
+
+    cart.products.forEach((item) => {
+      const price = item.product.price * item.quantity;
+      total += price;
+    })
+    
+    return total;
+  };
 
   const handleCheckout = async () => {
     try {
@@ -168,27 +179,23 @@ function Cart() {
           )})}
         </div>
         {/* order summary */}
-        <div className="sticky top-5 flex h-fit flex-col gap-3 border p-8">
+        <div className="sticky top-20 flex h-fit flex-col gap-3 border p-8">
           <h3 className="text-center text-4xl font-extralight">
             ORDER SUMMARY
           </h3>
           <table className="order-summary-table w-full text-lg">
             <tbody>
             <tr>
-              <th>Subtotal</th>
-              <td>$10</td>
-            </tr>
-            <tr>
               <th>Estimated Shipping</th>
-              <td>$590</td>
+              <td>$0</td>
             </tr>
             <tr>
               <th>Shipping Discount</th>
-              <td>-$10</td>
+              <td>$0</td>
             </tr>
             <tr>
               <th>Total</th>
-              <td>$90</td>
+              <td>${getTotalPrice()}</td>
             </tr>
             </tbody>
           </table>
