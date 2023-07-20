@@ -21,7 +21,13 @@ function Cart() {
   const router = useRouter()
 
   const cart = useSelector(selectCart);
-  const { data: session } = useSession()
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/login');
+    };
+  }, [])
 
   const handleCheckout = async () => {
     try {
