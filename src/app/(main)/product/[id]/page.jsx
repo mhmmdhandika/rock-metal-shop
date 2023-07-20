@@ -21,14 +21,16 @@ function Product({ params }) {
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
+  const [selectedItemPrice, setSelectedItemPrice] = useState(null);
   const [selectedItemQuantity, setSelectedItemQuantity] = useState(null);
 
   useEffect(() => {
     const selectedItem = product?.stock && product?.stock.find((item) => item.color === color && item.size === size);
     if (selectedItem) {
+      setSelectedItemPrice(selectedItem.price);
       setSelectedItemQuantity(selectedItem.quantity);
     }
-  }, [size, color])
+  }, [size, color]);
 
   useEffect(() => {
     const getProduct = async () => {
@@ -95,8 +97,19 @@ function Product({ params }) {
         </h1>
         <h2 className="my-3 text-7xl font-extralight">${product.price}</h2>
         <div dangerouslySetInnerHTML={{ __html: product.desc }} className="my-3 product-desc" />
-        <div>
-          Stock: {selectedItemQuantity === null ? 'Select color and size first' : selectedItemQuantity} 
+        <div className="flex gap-5 items-center">
+          {selectedItemQuantity && selectedItemPrice ? (
+            <> 
+              <div>
+                Stock: {selectedItemQuantity === null ? 'Select color and size first' : selectedItemQuantity}
+              </div>
+              <div>
+                Price: {selectedItemPrice === null ? 'Select color and size first' : `$${selectedItemPrice}`}
+              </div>
+            </>
+          ) : (
+            <div>Stock & price: Select color and size first</div>
+          )} 
         </div>
         <form>
           <div className="flex items-center gap-14">
