@@ -226,14 +226,30 @@ function Navbar() {
               <h3 className="text-lg">Muhamad Handika</h3>
             </div>
             <div className="flex flex-col gap-3">
-              <div className="flex items-center gap-5">
-                <CartIcon size={30} />
+              <Link href="/cart" className="flex items-center gap-5">
+                <div className="relative"> 
+                  <CartIcon
+                    size={30}
+                    color="black"
+                  />
+                  <span className="absolute -right-3 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 text-white">
+                    {cart.totalQuantity}
+                  </span>
+                </div> 
                 <h4 className="text-md">Cart</h4>
-              </div>
-              <div className="flex items-center gap-5">
-                <HeartIcon size={30} />
+              </Link>
+              <Link href="/wishlists" className="flex items-center gap-5">
+                <div className="relative">
+                  <HeartIcon
+                    size={30}
+                    color="black"
+                  />
+                  <span className="absolute -right-3 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 text-white">
+                    {wishlist.products.length === 0 ? 0 : wishlist.products.length - 1}
+                  </span>
+                </div> 
                 <h4 className="text-md">Wishlist</h4>
-              </div>
+              </Link>
             </div>
           </div>
           <div className="flex flex-col gap-3">
