@@ -162,7 +162,7 @@ function Navbar() {
                   color={isNavbarTransparent ? "white" : "black"}
                 />
                 <span className="absolute -right-3 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 text-white">
-                  {wishlist.products.length - 1}
+                  {wishlist.products.length}
                 </span>
               </Link>
             </>
@@ -245,7 +245,7 @@ function Navbar() {
                     color="black"
                   />
                   <span className="absolute -right-3 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 text-white">
-                    {wishlist.products.length === 0 ? 0 : wishlist.products.length - 1}
+                    {wishlist.products.length === 0 ? 0 : wishlist.products.length}
                   </span>
                 </div> 
                 <h4 className="text-md">Wishlist</h4>
