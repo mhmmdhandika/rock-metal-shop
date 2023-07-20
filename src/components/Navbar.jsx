@@ -223,7 +223,7 @@ function Navbar() {
                   className="w-9"
                 />
               </div>
-              <h3 className="text-lg">Muhamad Handika</h3>
+              <h3 className="text-lg">{session ? session.user.firstName : 'Guest'}</h3>
             </div>
             <div className="flex flex-col gap-3">
               <Link href="/cart" className="flex items-center gap-5">

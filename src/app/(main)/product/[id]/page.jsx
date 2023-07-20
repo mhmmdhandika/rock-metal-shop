@@ -22,6 +22,8 @@ function Product({ params }) {
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
 
+  useEffect(() => { console.log(product) }, [product])
+
   useEffect(() => {
     const getProduct = async () => {
       try {
