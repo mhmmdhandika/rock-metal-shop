@@ -215,7 +215,7 @@ function Navbar() {
                 <CloseIcon size={25} />
               </button>
             </div>
-            <div className="mb-10 flex items-center gap-5">
+            <div className="mb-10 flex items-center gap-3">
               <div className="h-9 w-9 overflow-hidden rounded-full">
                 <img
                   src="/assets/img/other/no-profile.png"
@@ -225,28 +225,22 @@ function Navbar() {
               </div>
               <h3 className="text-lg">{session ? session.user.firstName : 'Guest'}</h3>
             </div>
-            <div className="flex flex-col gap-3">
-              <Link href="/cart" className="flex items-center gap-5">
+            <div className="flex flex-col gap-5">
+              <Link href="/cart" className="flex items-center gap-3">
                 <div className="relative"> 
                   <CartIcon
                     size={30}
                     color="black"
                   />
-                  <span className="absolute -right-3 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 text-white">
-                    {cart.totalQuantity}
-                  </span>
                 </div> 
                 <h4 className="text-md">Cart</h4>
               </Link>
-              <Link href="/wishlists" className="flex items-center gap-5">
+              <Link href="/wishlists" className="flex items-center gap-3">
                 <div className="relative">
                   <HeartIcon
                     size={30}
                     color="black"
                   />
-                  <span className="absolute -right-3 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 text-white">
-                    {wishlist.products.length === 0 ? 0 : wishlist.products.length}
-                  </span>
                 </div> 
                 <h4 className="text-md">Wishlist</h4>
               </Link>

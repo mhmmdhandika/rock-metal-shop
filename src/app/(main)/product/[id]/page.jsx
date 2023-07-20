@@ -21,8 +21,14 @@ function Product({ params }) {
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
+  const [selectedItemQuantity, setSelectedItemQuantity] = useState(null);
 
-  useEffect(() => { console.log(product) }, [product])
+  useEffect(() => {
+    const selectedItem = product?.stock && product?.stock.find((item) => item.color === color && item.size === size);
+    if (selectedItem) {
+      setSelectedItemQuantity(selectedItem.quantity);
+    }
+  }, [size, color])
 
   useEffect(() => {
     const getProduct = async () => {
@@ -41,10 +47,17 @@ function Product({ params }) {
   }, [idProduct]);
 
   const handleQuantity = (type) => {
-    if (type === "dec") {
-      quantity > 1 && setQuantity(quantity - 1);
+    if (color === '' || size === '') {
+      Swal.fire({
+        title: 'Please select color and size first!',
+        icon: 'warning',
+      })
     } else {
-      setQuantity(quantity + 1);
+      if (type === "dec") {
+        quantity > 1 && setQuantity(quantity - 1);
+      } else {
+        setQuantity(quantity + 1);
+      }
     }
   };
 
@@ -82,6 +95,9 @@ function Product({ params }) {
         </h1>
         <h2 className="my-3 text-7xl font-extralight">${product.price}</h2>
         <div dangerouslySetInnerHTML={{ __html: product.desc }} className="my-3 product-desc" />
+        <div>
+          Stock: {selectedItemQuantity === null ? 'Select color and size first' : selectedItemQuantity} 
+        </div>
         <form>
           <div className="flex items-center gap-14">
             {/* color option */}
