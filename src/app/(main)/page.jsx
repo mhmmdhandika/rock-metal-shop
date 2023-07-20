@@ -43,12 +43,12 @@ export default function Home() {
                   <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-2 text-center text-white">
                     <h1 className="text-5xl font-bold">{item.title}</h1>
                     <p>{item.desc}</p>
-                    <a
-                      href="#"
+                    <Link
+                      href="#shopping-product-list"
                       className="block w-fit border border-white px-3 py-2"
                     >
                       SHOP NOW
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </SwiperSlide>
@@ -57,7 +57,7 @@ export default function Home() {
         </header>
       </Suspense>
       <Suspense fallback={<ShoppingProductListLoading />}>
-        <div className="section-space-x mt-5 flex items-center justify-between">
+        <div id="shopping-product-list" className="section-space-x mt-5 flex items-center justify-between">
           <h2 className="text-xl">Featured products</h2>
           <Link
             href="/products"
