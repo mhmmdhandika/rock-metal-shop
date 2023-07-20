@@ -92,7 +92,9 @@ function Navbar() {
           )}
           <div className="relative">
             <input
-              className={`w-full rounded-md border bg-transparent px-4 py-2 focus:outline-none ${isNavbarTransparent ? 'text-white' : 'text-black'}`}
+              className={`w-full rounded-md border bg-transparent px-4 py-2 focus:outline-none ${
+                isNavbarTransparent ? "text-white" : "text-black"
+              }`}
               type="text"
               placeholder="Search..."
             />
@@ -144,28 +146,24 @@ function Navbar() {
         </div>
         {/* Toggle Bar */}
         <div className="flex flex-grow-0 items-center justify-end gap-5">
-          {status === "authenticated" && (
-            <>
-              <Link href="/cart" className="relative">
-                <CartIcon
-                  size={25}
-                  color={isNavbarTransparent ? "white" : "black"}
-                />
-                <span className="absolute -right-3 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 text-white">
-                  {cart.totalQuantity}
-                </span>
-              </Link>
-              <Link href="/wishlists" className="relative">
-                <HeartIcon
-                  size={25}
-                  color={isNavbarTransparent ? "white" : "black"}
-                />
-                <span className="absolute -right-3 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 text-white">
-                  {wishlist.products.length}
-                </span>
-              </Link>
-            </>
-          )}
+          <Link href="/cart" className="relative">
+            <CartIcon
+              size={25}
+              color={isNavbarTransparent ? "white" : "black"}
+            />
+            <span className="absolute -right-3 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 text-white">
+              {cart.totalQuantity}
+            </span>
+          </Link>
+          <Link href="/wishlists" className="relative">
+            <HeartIcon
+              size={25}
+              color={isNavbarTransparent ? "white" : "black"}
+            />
+            <span className="absolute -right-3 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 text-white">
+              {wishlist.products.length}
+            </span>
+          </Link>
           <button
             className={`focus:outline-none ${
               isNavbarTransparent ? "text-white" : "text-black"
@@ -207,7 +205,7 @@ function Navbar() {
         className="absolute right-0 top-0 h-screen w-0 transform overflow-hidden bg-white transition-all duration-500 ease-in-out"
         ref={navbarAside}
       >
-        <div className="h-full flex transform flex-col justify-between gap-3 overflow-hidden border-l p-5 transition-all duration-500 ease-in-out">
+        <div className="flex h-full transform flex-col justify-between gap-3 overflow-hidden border-l p-5 transition-all duration-500 ease-in-out">
           <div>
             <div className="mb-3 flex justify-end">
               <button onClick={handleSidebar}>
@@ -222,25 +220,21 @@ function Navbar() {
                   className="w-9"
                 />
               </div>
-              <h3 className="text-lg">{session ? session.user.firstName : 'Guest'}</h3>
+              <h3 className="text-lg">
+                {session ? session.user.firstName : "Guest"}
+              </h3>
             </div>
             <div className="flex flex-col gap-5">
               <Link href="/cart" className="flex items-center gap-3">
-                <div className="relative"> 
-                  <CartIcon
-                    size={30}
-                    color="black"
-                  />
-                </div> 
+                <div className="relative">
+                  <CartIcon size={30} color="black" />
+                </div>
                 <h4 className="text-md">Cart</h4>
               </Link>
               <Link href="/wishlists" className="flex items-center gap-3">
                 <div className="relative">
-                  <HeartIcon
-                    size={30}
-                    color="black"
-                  />
-                </div> 
+                  <HeartIcon size={30} color="black" />
+                </div>
                 <h4 className="text-md">Wishlist</h4>
               </Link>
             </div>
