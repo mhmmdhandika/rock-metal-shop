@@ -61,7 +61,7 @@ export const deleteItemCart = createAsyncThunk(
         }
       })
       const result = await response.json();
-      return resul.data;
+      return result.data;
     } catch (error) {
       return rejectWithValue({
         message: error.message,
@@ -147,6 +147,18 @@ const cartSlice = createSlice({
       });
     }),
     // delete a cart item
+    builder.addCase(deleteItemCart.fulfilled, (state, action) => {
+      let totalQuantity = 0
+      if (action.payload.products.length !== 0) {
+        // reset products to prevent add a products item from previous state
+        state.products = [];
+        action.payload.products.map(item => {
+          state.products.push(item)
+          totalQuantity += item.quantity
+        })
+      }
+      state.totalQuantity = totalQuantity;
+    })
     builder.addCase(deleteItemCart.rejected, (state, action) => {
       console.log(action)
     }),
