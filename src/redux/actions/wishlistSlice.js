@@ -80,31 +80,21 @@ const wishlistSlice = createSlice({
       state.products = products
     })
     // add new wishlist item
-    builder.addCase(addWishlistItem.pending, (state, { meta }) => {
-      state.products.push({
-        _id: null,
-        product: meta.arg.product,
-      })
-    })
     builder.addCase(addWishlistItem.fulfilled, (state, action) => {
       const { products, ...otherData } = action.payload;
       state.productInfo = otherData;
       state.products = products;
+      console.log('successfully adding a new item');
     })
     builder.addCase(addWishlistItem.rejected, (state, action) => {
       console.log(action)
     })
     // delete wishlist item
-    builder.addCase(deleteWishlistItem.pending, (state, action) => {
-      state.products = state.products.filter((item) => (
-        item.product._id !== action.meta.arg.productId
-      ))
-    })
     builder.addCase(deleteWishlistItem.fulfilled, (state, action) => {
       const { products, ...otherData } = action.payload;
-      console.log(products)
       state.productInfo = otherData;
       state.products = products;
+      console.log('successfully deleted the item');
     })
   }
 })
