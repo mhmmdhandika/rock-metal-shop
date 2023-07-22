@@ -124,7 +124,20 @@ const cartSlice = createSlice({
           toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
       })
-    }),
+    })
+    // add new item cart
+    builder.addCase(addNewItemCart.fulfilled, (state, action) => {
+      let totalQuantity = 0
+      if (action.payload.products.length !== 0) {
+        // reset products to prevent add a products item from previous state
+        state.products = [];
+        action.payload.products.map(item => {
+          state.products.push(item)
+          totalQuantity += item.quantity
+        })
+      }
+      state.totalQuantity = totalQuantity;
+    })
     builder.addCase(addNewItemCart.rejected, (state, action) => {
       state.isLoading = false;
       Swal.fire({
