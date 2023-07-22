@@ -42,13 +42,9 @@ function Cart() {
 
   const handleCheckout = async () => {
     try {
-      const selectedProducts = cart.products.map((product) => ({
-        id: product._id,
-        quantity: product.quantity,
-      }));
-      const checkoutData = cart.products.map((product) => ({
-        id: product._id,
-        quantity: product.quantity,
+      const selectedProducts = cart.products.map((item) => ({
+        id: item.product._id,
+        quantity: item.quantity,
       }));
       const response = await fetch("/api/stripe/payment", {
         method: 'POST',
@@ -57,7 +53,8 @@ function Cart() {
         },
         body: JSON.stringify(selectedProducts),
       });
-      window.location.assign(response.data.url)
+      const result = await response.json();
+      window.location.assign(result.data.url);
     } catch (error) {
       console.error(error);
     }

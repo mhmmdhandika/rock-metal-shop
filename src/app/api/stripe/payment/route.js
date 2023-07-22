@@ -32,6 +32,7 @@ product_data: { name: selectedProduct.title },
     success_url: `${NEXT_PUBLIC_ORIGIN_URL}/payment/success`,
     cancel_url: `${NEXT_PUBLIC_ORIGIN_URL}/payment/cancel`,
   });
-  console.log(session)
-  return NextResponse.json({ url: session.url });
+  return NextResponse.json({ 
+    data: { url: session.url },
+  });
 }
