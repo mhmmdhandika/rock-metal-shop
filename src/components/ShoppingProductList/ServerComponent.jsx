@@ -27,7 +27,7 @@ export default async function ShoppingProductList(props) {
   return (
     <div className="section-space-x my-5">
       <div className="grid grid-cols-1 justify-between gap-2 sm:grid-cols-2 lg:grid-cols-4">
-        {products?.map((item, index) => (
+        {Array.isArray(products) && products?.map((item, index) => (
           <Product item={item} key={index} />
         ))}
       </div>
